@@ -2,31 +2,18 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Firebase Map Prototype</title>
+  <title>Whisper Prototype</title>
 </head>
 <body>
   <div class="mainDiv" align="center">
-    <h1 style="font-family:Helvetica" align="center">Firebase Map Prototype</h1>
+    <h1 style="font-family:Helvetica" align="center">Whisper Prototype</h1>
+    <p style="font-family:Helvetica">Leave a message at your current location and check out messages other people have left on the map</p>
   </div>
   <div class="msgDiv" align="center">
 
     <textarea id="nameField1" placeholder="Enter name here..."></textarea>
     <textarea id="messageField1" placeholder="Enter message here..."></textarea>
     <button id="submitButton" onclick="messageClick1()"><i class="fa fa-arrow-right" aria-hidden="true"></i>Submit</button>
-
-  </div>
-  <div class="msgDiv" align="center">
-
-    <textarea id="nameField2" placeholder="Enter name here..."></textarea>
-    <textarea id="messageField2" placeholder="Enter message here..."></textarea>
-    <button id="submitButton" onclick="messageClick2()"><i class="fa fa-arrow-right" aria-hidden="true"></i>Submit</button>
-
-  </div>
-  <div class="msgDiv" align="center">
-
-    <textarea id="nameField3" placeholder="Enter name here..."></textarea>
-    <textarea id="messageField3" placeholder="Enter message here..."></textarea>
-    <button id="submitButton" onclick="messageClick3()"><i class="fa fa-arrow-right" aria-hidden="true"></i>Submit</button>
 
   </div>
 
@@ -44,75 +31,10 @@
     firebase.initializeApp(config);
   </script>
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  <script src="index.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDpRiEB8nfTckN30OjnzWllkKldDcfRDA&callback=initMap">></script>
+  <script src="index.js"></script>
   <script type="text/javascript">
-    function showPosition(){
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(showMap, showError);
-      } else{
-        alert("Sorry, your browser does not support HTML5 geolocation.");
-      }
-    }
 
-    // Define callback function for successful attempt
-    function showMap(position){
-      // Get location data
-      console.log(fname2);
-      lat = position.coords.latitude;
-      long = position.coords.longitude;
-      var latlong = new google.maps.LatLng(lat, long);
-
-      var myOptions = {
-        center: latlong,
-        zoom: 16,
-        mapTypeControl: true,
-        navigationControlOptions: {style:google.maps.NavigationControlStyle.SMALL}
-      }
-      var latilongi = new google.maps.LatLng(flat, flong);
-      var map = new google.maps.Map(document.getElementById("embedMap"), myOptions);
-      var user1message = new google.maps.Marker({position:latilongi,map:map, title:"test"});
-      var infowindow = new google.maps.InfoWindow({
-        content: fname + ": "+fmessage
-      });
-      user1message.addListener('click', function() {
-        infowindow.open(map, user1message);
-      });
-
-
-      var latilongi2 = new google.maps.LatLng(flat2, flong2);
-      var user2message = new google.maps.Marker({position:latilongi2,map:map, title:"testo"});
-      var infowindow2 = new google.maps.InfoWindow({
-        content: fname2 + ": "+fmessage2
-      });
-      user2message.addListener('click', function() {
-        infowindow2.open(map, user2message);
-      });
-
-
-      var latilongi3 = new google.maps.LatLng(flat3, flong3);
-      var user3message = new google.maps.Marker({position:latilongi3,map:map, title:"testy"});
-      var infowindow3 = new google.maps.InfoWindow({
-        content: fname3 + ": "+fmessage3
-      });
-      user3message.addListener('click', function() {
-        infowindow3.open(map, user3message);
-      });
-
-    }
-
-    // Define callback function for failed attempt
-    function showError(error){
-      if(error.code == 1){
-        result.innerHTML = "You've decided not to share your position, but it's OK. We won't ask you again.";
-      } else if(error.code == 2){
-        result.innerHTML = "The network is down or the positioning service can't be reached.";
-      } else if(error.code == 3){
-        result.innerHTML = "The attempt timed out before it could get the location data.";
-      } else{
-        result.innerHTML = "Geolocation failed due to unknown error.";
-      }
-    }
   </script>
   <div align="center">
     <button type="button" onclick="showPosition();">Show My Position on Google Map</button>
